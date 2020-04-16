@@ -10,27 +10,28 @@ Description: This R library contains the most important datasets
     datasets found in this library.
 License: MIT
 Imports:
+    sleepsimR,
     jsonlite,
+    usethis,
     lubridate,
     magrittr,
     ggplot2,
     future,
-    sleepsimR,
     dplyr,
     tidyr,
     purrr,
     coda,
     mcmcplots,
-    mHMMbayes,
     multimode
 Suggests: 
     testthat
 Remotes: 
-    JasperHG90/sleepsimR@99e7a8e0dabf4f732d0ce1bab3a8a527f42ca73d,
-    emmekeaarts/mHMMbayes@369420e05cb96e6af761a8bd9bd30b8539d27a24
+    JasperHG90/sleepsimR@99e7a8e0dabf4f732d0ce1bab3a8a527f42ca73d
 URL:
     https://github.com/JasperHG90/sleepsimReval
 BugReports:
     https://github.com/JasperHG90/sleepsimReval/issues
 Encoding: UTF-8
 LazyData: true
+Depends: 
+    R (>= 2.10)

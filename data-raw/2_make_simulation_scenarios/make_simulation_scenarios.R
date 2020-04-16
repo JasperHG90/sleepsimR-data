@@ -1,4 +1,5 @@
-# Make simulation scenarios
+# Make simulation scenarios for my simulation study
+# Written by: Jasper Ginn
 
 # Load sleepsimR
 library(sleepsimR)
@@ -68,8 +69,8 @@ scen_subs <- scen_subs %>%
   arrange(n, n_t, zeta, scenario_id)
 
 # Save scenarios
-write.csv(scen, file=gzfile("make_scenarios/scenarios.csv.gz"))
-write.csv(scen_subs, file=gzfile("make_scenarios/scenarios_subs.csv.gz"))
+write.csv(scen, file=gzfile("data-raw/2_make_simulation_scenarios/scenarios.csv.gz"))
+write.csv(scen_subs, file=gzfile("data-raw/2_make_simulation_scenarios/scenarios_subs.csv.gz"))
 
 # Make a set with scenarios to run again (models are saved to disk, need to do this again to check convergence)
 scen_rerun <- bind_rows(scen %>% filter(save_model), scen_subs %>% filter(save_model)) %>%
@@ -118,4 +119,9 @@ scen_rerun$start_gamma <- as.character(start_gamma)
 scen_rerun$start_emiss <- as.character(start_emiss)
 
 # Save
-write.csv(scen_rerun, file=gzfile("make_scenarios/scenarios_rerun.csv.gz"))
+write.csv(scen_rerun, file=gzfile("data-raw/2_make_simulation_scenarios/scenarios_rerun.csv.gz"))
+
+# Save as datasets in this library
+usethis::use_data(scen)
+usethis::use_data(scen_subs)
+usethis::use_data(scen_rerun)
