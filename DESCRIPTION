@@ -1,0 +1,36 @@
+Package: sleepsimRdata
+Type: Package
+Title: Collection of datasets generated for my thesis project.
+Version: 0.1.0
+Author: Jasper Ginn
+Maintainer: Jasper Ginn <Jasperginn@gmail.com>
+Description: This R library contains the most important datasets
+    that I generated throughout the thesis project. The README.md
+    file contains more information about how to reproduce the 
+    datasets found in this library.
+License: MIT
+Imports:
+    jsonlite,
+    lubridate,
+    magrittr,
+    ggplot2,
+    future,
+    sleepsimR,
+    dplyr,
+    tidyr,
+    purrr,
+    coda,
+    mcmcplots,
+    mHMMbayes,
+    multimode
+Suggests: 
+    testthat
+Remotes: 
+    JasperHG90/sleepsimR@99e7a8e0dabf4f732d0ce1bab3a8a527f42ca73d,
+    emmekeaarts/mHMMbayes@369420e05cb96e6af761a8bd9bd30b8539d27a24
+URL:
+    https://github.com/JasperHG90/sleepsimReval
+BugReports:
+    https://github.com/JasperHG90/sleepsimReval/issues
+Encoding: UTF-8
+LazyData: true
