@@ -40,6 +40,8 @@ names(ids) <- uid
 io$id <- unname(ids[as.character(io$identifier)])
 io$identifier <- NULL
 io <- io[,c(6, 1, 2 ,3, 4, 5)]
+# Rename
+sleepdata <- io
 
 # Get summary statistics for each dep var
 summary_statistics_sleepdata <- io %>%
@@ -59,3 +61,4 @@ total_variance_sleepdata <- io %>%
 # Save datasets
 usethis::use_data(summary_statistics_sleepdata)
 usethis::use_data(total_variance_sleepdata)
+usethis::use_data(sleepdata)

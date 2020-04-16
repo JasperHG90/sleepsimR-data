@@ -4,3 +4,6 @@
 .Ruserdata
 dev.R
 data-raw/1_preprocess_sleep_data/EEG_data_final.rds
+data-raw/3_preprocess_simulation_results/sleepsimR_results_parsed.rds
+data-raw/3_preprocess_simulation_results/data_final/*.rds
+data-raw/3_preprocess_simulation_results/data_preprocessed*.rds
