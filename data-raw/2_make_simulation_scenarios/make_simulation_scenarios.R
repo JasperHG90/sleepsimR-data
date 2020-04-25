@@ -110,7 +110,7 @@ write.csv(scen_subs, file=gzfile("data-raw/2_make_simulation_scenarios/scenarios
 # Make a set with scenarios to run again (models are saved to disk, need to do this again to check convergence)
 scen_rerun <- bind_rows(scen %>% filter(save_model), scen_subs %>% filter(save_model)) %>%
   group_by(scenario_id) %>%
-  slice(1:6)
+  slice(1:3)
 
 # Make new starting values & seeds for each model
 set.seed(22244214)
@@ -136,16 +136,16 @@ start_gamma <- lapply(diag_value, function(x) {
 start_emiss <- lapply(1:nrow(scen_rerun), function(x) {
   jsonlite::toJSON(list(
     #EEG_Fpz_Cz_max_gamma
-    EEG_Fpz_Cz_mean_beta = c( -0.1 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
-                              -0.65 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
-                              0.8 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1)),
+    EEG_Fpz_Cz_mean_beta = c( -0.36 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
+                              -0.60 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
+                              0.7 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1)),
     # EOG_median_theta
-    EOG_median_theta = c( 0.8 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
-                          -1 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
-                          0 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1)),
+    EOG_median_theta = c( 1.01 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
+                          -1.31 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
+                          -.24 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1)),
     # EOG_min_beta
-    EOG_min_beta = c(  0.9 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
-                       -1 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
+    EOG_min_beta = c(  0.75 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
+                       -1.3 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1),
                        0 + runif(1, -.2, .2), 0.2 + runif(1, -.1,.1))
   ), pretty = TRUE, flatten = TRUE)
 })
