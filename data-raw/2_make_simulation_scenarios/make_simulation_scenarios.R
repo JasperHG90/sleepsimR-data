@@ -4,6 +4,10 @@
 # Load sleepsimR
 library(sleepsimR)
 
+opts <- getOption("sleepsimR_simulate")
+opts$emission_bar <- opts$emission_bar_original_failed
+options("sleepsimR_simulate" = opts)
+
 # Make scenarios
 scen <- generate_scenarios()
 
@@ -26,6 +30,8 @@ scen <- scen %>%
 # Test a model
 library(jsonlite)
 sim <- as.list(scen[29000,])
+sim$n <- 20
+sim$zeta <- 1
 # Make dataset
 data_simulated <- simulate_dataset(sim$n, sim$n_t, sim$zeta, sim$Q, sim$dsim_seed)
 # To data frame
@@ -36,6 +42,17 @@ tdf <- data.frame(
   EOG_min_beta = data_simulated$obs[,4]
 )
 states <- data_simulated$states[,2]
+
+# View
+library(ggplot2)
+library(tidyr)
+tdf %>%
+  mutate(state = states) %>%
+  gather(var, val, -id, -state) %>%
+  ggplot(aes(x=val, fill = as.factor(state))) +
+    geom_density(alpha=0.4) +
+    facet_wrap(". ~ var")
+
 # Get summary statistics for each
 em1 <- tapply(tdf[,-1]$EEG_mean_beta, states, mean)
 em2 <- tapply(tdf[,-1]$EOG_median_theta, states, mean)
@@ -59,10 +76,28 @@ start_values <- list(
   matrix(unlist(sim$start_emiss$EOG_min_beta),
          ncol=2, byrow=TRUE)
 )
+# start_values
+# start_values[[2]] <- start_values[[2]] + runif(6, 0.01, 0.05)
+# start_values[[3]] <- start_values[[3]] + runif(6, 0.01, 0.05)
+# start_values[[4]] <- start_values[[4]] + runif(6, 0.01, 0.05)
+# gamma_diag <- runif(1, 0.5, 0.8)
+# gamma_off_diag <- (1-gamma_diag) / 2
+# diag(start_values[[1]]) <- gamma_diag
+# start_values[[1]][upper.tri(start_values[[1]])] <- gamma_off_diag
+# start_values[[1]][lower.tri(start_values[[1]])] <- gamma_off_diag
+# sim$model_seed <- sample.int(99999999, 1)
+
 # Run model
-mod <- sleepsimR::run_mHMM(tdf, start_values = start_values, hyperprior_means = hyp_priors,
+mod2 <- sleepsimR::run_mHMM(tdf, start_values = start_values,
+                            mprop = list("m" = 3, "n_dep" = 3),
+                            hyperprior_means = hyp_priors,
                            model_seed = sim$model_seed,mcmc_iterations=3250, mcmc_burn_in = 1250,
                            order_data = FALSE)
+
+sleepsimReval::tpp(mod2, mod1, "emiss_mu_bar", var=2)
+sleepsimReval::compute_grs(mod1, mod2, "emiss_mu_bar", var=2)
+
+sleepsimReval::dens_plot(mod1, mod2, "emiss_mu_bar", var=2)
 
 # Arrange subset
 scen_subs <- scen_subs %>%
@@ -79,7 +114,7 @@ scen_rerun <- bind_rows(scen %>% filter(save_model), scen_subs %>% filter(save_m
 
 # Make new starting values & seeds for each model
 set.seed(22244214)
-scen_rerun$dsim_seed <- sample(1:5678623, nrow(scen_rerun), replace=FALSE)
+# scen_rerun$dsim_seed <- sample(1:5678623, nrow(scen_rerun), replace=FALSE)
 scen_rerun$model_seed <- sample(1:5678623, nrow(scen_rerun), replace=FALSE)
 
 # Create start values
