@@ -9,6 +9,7 @@ library(stringr)
 library(dplyr)
 
 # Base folder
+# Run the lines below with SCEN 1-5 and ZETA 0.25 to 0.5
 SCEN <- 5
 BASE_FOLDER <- "data-raw/5_preprocess_baseline_results/data_preprocessed/"
 ZETA <- 0.25
@@ -382,3 +383,20 @@ scen_out <- bind_cols(scen1,
 
 # Write
 write.csv(scen_out, file = paste0("data-raw/5_preprocess_baseline_results/scen_zeta_05.csv"), row.names = FALSE)
+
+# Save as data
+clnms <- c()
+for(scenid in 1:5) {
+  print(scenid)
+  clnms <- c(clnms, c(paste0("pbias_scenario_", scenid),
+                      paste0("empirical_se_scenario_", scenid),
+                      paste0("modSE_scenario_", scenid),
+                      paste0("MSE_scenario_", scenid),
+                      paste0("coverage_scenario_", scenid),
+                      paste0("bias_corr_coverage_scenario_", scenid)))
+}
+colnames(scen_out)[3:32] <- clnms
+
+# Save dataset
+scen_out_zeta_025 <- scen_out
+usethis::use_data(scen_out_zeta_025)

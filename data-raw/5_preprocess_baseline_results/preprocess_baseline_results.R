@@ -5,9 +5,7 @@ library(dplyr)
 library(purrr)
 library(stringr)
 
-# Results for scenario 2 (means are spread out + lower self-probabilities)
-# Results for scenario 1 (means are spread out)
-# Run this file twice with different SCEN settings (1 or 2)
+# Run this file five times with different SCEN settings (1 or 2)
 SCEN <- 5
 
 # Folder paths
