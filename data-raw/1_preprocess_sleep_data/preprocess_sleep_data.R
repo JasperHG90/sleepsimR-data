@@ -1,5 +1,4 @@
 # Preprocess the sleep dataset obtained by running the docker program
-#  found here <>
 # Written by: Jasper Ginn
 
 library(dplyr)
