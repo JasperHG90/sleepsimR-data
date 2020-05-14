@@ -17,9 +17,9 @@
 #' }
 #'
 #' @seealso The docker app used to download the data can be found here:
-#' <>. The docker app used to preprocess the data can be found here:
-#' <>. The script used generate this dataset can be found here:
-#' <>.
+#' <https://doi.org/10.5281/zenodo.3826066>. The docker app used to preprocess the data can be found here:
+#' <https://doi.org/10.5281/zenodo.3826068>. The script used generate this dataset can be found in the folder
+#' "data-raw/1_preprocess_sleep_data" of this R library.
 #'
 #' @source \url{https://physionet.org/content/sleep-edfx/1.0.0/}
 "sleepdata"
@@ -138,6 +138,32 @@
 #' sleepsimR-api program contains this dataset to manage the simulation study. For more information,
 #' visit <https://github.com/JasperHG90/sleepsimR-api>
 "scen_rerun"
+
+#' Specification of the baseline simulation scenarios (2.104 iterations)
+#'
+#' This dataset contains simulation settings for 2.104 baseline iterations  of my simulation study.
+#' It was created using the function \link[sleepsimR]{generate_scenarios} with seed value 912326.
+#'
+#' @format A data frame with 2.104 rows and 12 variables. :
+#' \describe{
+#'    \item{n}{int. number of subjects}
+#'    \item{n_t}{int. number of observed data points for each subject}
+#'    \item{zeta}{float. between-subject variance for the means of the emission distributions}
+#'    \item{Q}{float. between-subject variance for the intercepts of the transition-probability matrix}
+#'    \item{scenario_id}{string .unique id of the simulation scenario}
+#'    \item{rank}{int. iteration number of the simulation scenario}
+#'    \item{iteration_id}{string. unique id of the iteration}
+#'    \item{dsim_seed}{int. random seed used to generate the data}
+#'    \item{model_seed}{int. random seed used to run the mHMM}
+#'    \item{start_gamma}{json. initial values for the between-subject transition probability matrix}
+#'    \item{start_emiss}{json. intiial values for each of the 3 emission distributions}
+#' }
+#'
+#' @seealso Versions 1.5.1 <https://github.com/JasperHG90/sleepsimR-api/releases/tag/v1.5.1> and
+#' 1.5.2 <https://github.com/JasperHG90/sleepsimR-api/releases/tag/v1.5.2> of the
+#' sleepsimR-api program contain this dataset to manage the simulation study. For more information,
+#' visit <https://github.com/JasperHG90/sleepsimR-api>
+"scen_baseline"
 
 #' Parsed simulation results for emission distribution between-subject means.
 #'
@@ -345,3 +371,59 @@
 #' <https://github.com/JasperHG90/sleepsimR-documentation>.
 #' For a definition of the simulation metrics, see: Morris, Tim P., Ian R. White, and Michael J. Crowther. "Using simulation studies to evaluate statistical methods." Statistics in medicine 38.11 (2019): 2074-2102.
 "simulation_data_gamma_prob"
+
+#' Simulation results for the baseline scenarios, zeta=0.25 (scenarios 1-5A)
+#'
+#' This dataset contains the simulation results for baseline scenarios 1-5A. To reproduce these datasets, follow the instructions in the
+#' "data-raw/5_preprocess_baseline_results" found in this R library.
+#'
+#' @format A data frame with 27 rows and 32 variables. :
+#' \describe{
+#'    \item{emiss_var_short}{string. One of 'EEG_mean_beta', 'EOG_median_theta' or 'EOG_min_beta'.}
+#'    \item{state}{string. Latent state. One of 'state1' (Awake), 'state2' (NREM) or 'state3' (REM) or transitions from state to state.}
+#'    \item{pbias_scenario_{1-5}}{String. Percent bias of the parameter estimates versus the population parameter for a scenario. MC error given in parentheses.}
+#'    \item{empirical_se_scenario_{1-5}}{String. Empirical SE for a scenario. MC error given in parentheses.}
+#'    \item{modSE_scenario_{1-5}}{String. Average model SE/CCI for a scenario. MC error given in parentheses.}
+#'    \item{MSE_scenario_{1-5}}{String. MSE for a scenario. MC error given in parentheses.}
+#'    \item{coverage_scenario_{1-5}}{String. Percent coverage for a scenario. MC error given in parentheses.}
+#'    \item{bias_corr_coverage_scenario_{1-5}}{numeric. Percent bias-corrected coverage for a scenario. MC error given in parentheses.}
+#' }
+#'
+#' @seealso The simulation was conducted using the following two programs. The first program is the resource
+#' manager found at <https://github.com/JasperHG90/sleepsimR-api/releases>. In particular, versions 1.5.1 - 1.5.4
+#' were used. These versions contain different baseline scenarios. For more
+#' information, see \link[sleepsimRdata]{scen_baseline}. The program used to run the simulations can be found here
+#' <https://github.com/JasperHG90/sleepsimR-run/releases>. In particular, versions 1.5.1 - 1.5.2 were used. The
+#' simulations were executed on a cluster managed by SURF <https://www.surf.nl/en>. For more information
+#' about the architectural design of the simulation study, visit
+#' <https://github.com/JasperHG90/sleepsimR-documentation>.
+#' For a definition of the simulation metrics, see: Morris, Tim P., Ian R. White, and Michael J. Crowther. "Using simulation studies to evaluate statistical methods." Statistics in medicine 38.11 (2019): 2074-2102.
+"scen_out_zeta_025"
+
+#' Simulation results for the baseline scenarios, zeta=0.5 (scenarios 1-5B)
+#'
+#' This dataset contains the simulation results for baseline scenarios 1-5B. To reproduce these datasets, follow the instructions in the
+#' "data-raw/5_preprocess_baseline_results" found in this R library.
+#'
+#' @format A data frame with 27 rows and 32 variables. :
+#' \describe{
+#'    \item{emiss_var_short}{string. One of 'EEG_mean_beta', 'EOG_median_theta' or 'EOG_min_beta'.}
+#'    \item{state}{string. Latent state. One of 'state1' (Awake), 'state2' (NREM) or 'state3' (REM) or transitions from state to state.}
+#'    \item{pbias_scenario_{1-5}}{String. Percent bias of the parameter estimates versus the population parameter for a scenario. MC error given in parentheses.}
+#'    \item{empirical_se_scenario_{1-5}}{String. Empirical SE for a scenario. MC error given in parentheses.}
+#'    \item{modSE_scenario_{1-5}}{String. Average model SE/CCI for a scenario. MC error given in parentheses.}
+#'    \item{MSE_scenario_{1-5}}{String. MSE for a scenario. MC error given in parentheses.}
+#'    \item{coverage_scenario_{1-5}}{String. Percent coverage for a scenario. MC error given in parentheses.}
+#'    \item{bias_corr_coverage_scenario_{1-5}}{numeric. Percent bias-corrected coverage for a scenario. MC error given in parentheses.}
+#' }
+#'
+#' @seealso The simulation was conducted using the following two programs. The first program is the resource
+#' manager found at <https://github.com/JasperHG90/sleepsimR-api/releases>. In particular, versions 1.5.1 - 1.5.4
+#' were used. These versions contain different baseline scenarios. For more
+#' information, see \link[sleepsimRdata]{scen_baseline}. The program used to run the simulations can be found here
+#' <https://github.com/JasperHG90/sleepsimR-run/releases>. In particular, versions 1.5.1 - 1.5.2 were used. The
+#' simulations were executed on a cluster managed by SURF <https://www.surf.nl/en>. For more information
+#' about the architectural design of the simulation study, visit
+#' <https://github.com/JasperHG90/sleepsimR-documentation>.
+#' For a definition of the simulation metrics, see: Morris, Tim P., Ian R. White, and Michael J. Crowther. "Using simulation studies to evaluate statistical methods." Statistics in medicine 38.11 (2019): 2074-2102.
+"scen_out_zeta_025"

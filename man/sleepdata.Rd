@@ -28,8 +28,8 @@ simulation study and empirical application.
 }
 \seealso{
 The docker app used to download the data can be found here:
-<>. The docker app used to preprocess the data can be found here:
-<>. The script used generate this dataset can be found here:
-<>.
+<https://doi.org/10.5281/zenodo.3826066>. The docker app used to preprocess the data can be found here:
+<https://doi.org/10.5281/zenodo.3826068>. The script used generate this dataset can be found in the folder
+"data-raw/1_preprocess_sleep_data" of this R library.
 }
 \keyword{datasets}

@@ -3,7 +3,15 @@
 .RData
 .Ruserdata
 dev.R
+# Simulation results
 data-raw/1_preprocess_sleep_data/EEG_data_final.rds
 data-raw/3_preprocess_simulation_results/sleepsimR_results_parsed.rds
 data-raw/3_preprocess_simulation_results/data_final/*.rds
 data-raw/3_preprocess_simulation_results/data_preprocessed*.rds
+# Baseline results
+data-raw/5_preprocess_baseline_results/results_scen*/*.json
+data-raw/5_preprocess_baseline_results/models/scen*/*.rds
+data-raw/5_preprocess_baseline_results/data_final/*.rds
+data-raw/5_preprocess_baseline_results/data_preprocessed/*.rds
+
+*.csv.gz
