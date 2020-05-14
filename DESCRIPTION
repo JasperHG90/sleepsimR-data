@@ -1,7 +1,7 @@
 Package: sleepsimRdata
 Type: Package
 Title: Collection of datasets generated for my thesis project.
-Version: 0.1.0
+Version: 0.3
 Author: Jasper Ginn
 Maintainer: Jasper Ginn <Jasperginn@gmail.com>
 Description: This R library contains the most important datasets
